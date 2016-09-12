@@ -1,0 +1,34 @@
+{
+  "name": "search-uuid",
+  "version": "1.0.0",
+  "description": "Search uuid to find user information",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Financial-Times/search-uuid.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Financial-Times/search-uuid/issues"
+  },
+  "homepage": "https://github.com/Financial-Times/search-uuid#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "node-fetch": "^1.6.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.4.0",
+    "eslint-config-airbnb-base": "^7.0.0",
+    "eslint-plugin-import": "^1.14.0"
+  }
+}
