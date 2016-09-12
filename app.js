@@ -1,5 +1,3 @@
-// server side
-
 require('dotenv').config();
 
 const express = require('express');
@@ -8,12 +6,11 @@ const path = require('path');
 const winston = require('winston');
 const compression = require('compression');
 const fetch = require('node-fetch');
-// const bodyParser = require('body-parser');
 
 const app = express();
 
 function findUserInfo(uuid, auth) {
-  return fetch(`http://localhost:1337/users/${uuid}`, { // calls email-users-lists API
+  return fetch(`http://localhost:1337/users/${uuid}`, {
     method: 'GET',
     headers: {
       Authorization: auth,
@@ -27,7 +24,6 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
 
-// app.use(bodyParser.urlencoded());
 app.use(compression());
 app.use(express.static(`${__dirname}/public`));
 
@@ -41,14 +37,12 @@ app.get('/users', (req, res) => {
     if (!userResponse.ok) {
       throw new Error('Error of some sort');
     }
-    return userResponse.json(); // headers etc
+    return userResponse.json();
   })
   .then((body) => {
-    console.log(body); // actual response body
     res.json(body);
   })
   .catch((err) => {
-    // console.log(err);
     res.status(404).send(err.message);
   });
 });

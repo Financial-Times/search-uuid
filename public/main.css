@@ -1,43 +1,4 @@
-/*{
-  title: "Search uuid for user info",
-  body: "This should render from the div {{body}} thing in main.hbs?",
-  background-color: blue;
-}
-*/
-
 body {
   padding-top: 100px;
   color: #696969;
 }
-
-/*
-
-.bottom-buffer {
-  margin-bottom: 20px;
-}
-
-.list-item-display {
-  padding: 10px;
-  margin-top: -1px;
-  margin-left: -1px;
-  border: 1px solid;
-}
-
-@media only screen and (max-width: 767px) {
-  .list-item:nth-child(even) {
-    background: #e0e0e0;
-  }
-  .list-item:nth-child(odd) {
-    background: #f6f6f6;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .list-item:nth-child(4n), .list-item:nth-child(4n-3) {
-    background: #e0e0e0;
-  }
-  .list-item:nth-child(4n-1), .list-item:nth-child(4n-2) {
-    background: #f6f6f6;
-  }
-}
-*/
