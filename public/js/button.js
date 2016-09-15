@@ -10,7 +10,28 @@ document.getElementsByClassName('search-button')[0].addEventListener('click', ()
     if (http.readyState === 4 && http.status === 200) {
       const myRes = JSON.parse(http.responseText);
       const details = document.getElementsByClassName('user-details')[0];
-      details.innerHTML = myRes.email;
+      const infoText = document.createElement('p');
+      infoText.innerHTML = `email: ${myRes.email} <br> uuid: ${myRes.uuid}`;
+      infoText.className = 'user-info';
+
+      // const mailingList = 'mailing list: '
+      // stuff = document.getElementsByClassName('mm');
+      // mailingList = document.createElement('div');
+      // mailingList.className = 'mm';
+      // stuff.appendChild(infoText);
+
+      for (const listObj of myRes.lists) {
+        console.log(listObj.list);
+        let listArray = listObj.list;
+        const deets = document.getElementsByClassName('user-lists')[0];
+        listArray = document.createElement('div');
+        listArray.innerHTML = `mailing list: ${listObj.list }`;
+        // Each list will have a button associated with it that unsubscribes the user from the list.
+        listArray.className = 'user-lists';
+        deets.appendChild(listArray);
+      }
+
+      details.appendChild(infoText);
     }
   };
 
