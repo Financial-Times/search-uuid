@@ -14,21 +14,19 @@ document.getElementsByClassName('search-button')[0].addEventListener('click', ()
       infoText.innerHTML = `email: ${myRes.email} <br> uuid: ${myRes.uuid}`;
       infoText.className = 'user-info';
 
-      // const mailingList = 'mailing list: '
-      // stuff = document.getElementsByClassName('mm');
-      // mailingList = document.createElement('div');
-      // mailingList.className = 'mm';
-      // stuff.appendChild(infoText);
-
       for (const listObj of myRes.lists) {
-        console.log(listObj.list);
-        let listArray = listObj.list;
         const deets = document.getElementsByClassName('user-lists')[0];
-        listArray = document.createElement('div');
-        listArray.innerHTML = `mailing list: ${listObj.list }`;
-        // Each list will have a button associated with it that unsubscribes the user from the list.
-        listArray.className = 'user-lists';
-        deets.appendChild(listArray);
+        const listItem = document.createElement('div');
+        const listId = document.createElement('span');
+        listId.innerHTML = `mailing list: ${listObj.list}`;
+        listItem.className = 'user-lists';
+        listItem.appendChild(listId);
+
+        const unsubscribe = document.createElement('button');
+        unsubscribe.className = 'unsubscribe';
+        unsubscribe.innerHTML = 'unsubscribe';
+        listItem.appendChild(unsubscribe);
+        deets.appendChild(listItem);
       }
 
       details.appendChild(infoText);
