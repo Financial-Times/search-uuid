@@ -16,7 +16,7 @@ function findUserInfo(uuid, auth) {
       Authorization: auth,
     },
   });
-};
+}
 
 function unsubscribeUser(userUuid, listId, auth) {
   return fetch(`http://localhost:1337/users/${userUuid}/lists/${listId}`, {
@@ -24,7 +24,7 @@ function unsubscribeUser(userUuid, listId, auth) {
     headers: {
       Authorization: auth,
     },
-  });  
+  });
 }
 
 app.engine('.hbs', exphbs({
@@ -72,31 +72,6 @@ app.post('/users', (req, res) => {
   });
 });
 
-
-
 app.listen(3000, () => {
   winston.info('magic happens on port 3000');
 });
-
-
-
-
-
-
-// ?uuid=44234234?listId=423423
-
-// {
-//   uuid: 44234433,
-//   listid: 323324
-// }
-
-
-
-
-
-
-
-
-
-
-
