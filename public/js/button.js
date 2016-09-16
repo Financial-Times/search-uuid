@@ -1,3 +1,20 @@
+function addListenerToButton(button, uuid, listId) {
+  button.addEventListener('click', () => {
+    const http = new XMLHttpRequest();
+    const url = `http://localhost:1337/users`;
+    http.open('post', url, true);
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    http.onreadystatechange = function() {
+      if (http.readyState == 4 && http.status == 200) {
+      alert(http.responseText);
+  }
+}
+    // ?uuid=${data}&listId=${listid}
+    http.send();
+  });
+}
+
+
 document.getElementsByClassName('search-button')[0].addEventListener('click', () => {
   const http = new XMLHttpRequest();
   const data = document.getElementsByClassName('input-box')[0].value;
@@ -13,6 +30,7 @@ document.getElementsByClassName('search-button')[0].addEventListener('click', ()
       const infoText = document.createElement('p');
       infoText.innerHTML = `email: ${myRes.email} <br> uuid: ${myRes.uuid}`;
       infoText.className = 'user-info';
+      details.appendChild(infoText);
 
       for (const listObj of myRes.lists) {
         const deets = document.getElementsByClassName('user-lists')[0];
@@ -22,16 +40,18 @@ document.getElementsByClassName('search-button')[0].addEventListener('click', ()
         listItem.className = 'user-lists';
         listItem.appendChild(listId);
 
-        const unsubscribe = document.createElement('button');
-        unsubscribe.className = 'unsubscribe';
-        unsubscribe.innerHTML = 'unsubscribe';
-        listItem.appendChild(unsubscribe);
+        const unsubscribeBtn = document.createElement('button');
+        unsubscribeBtn.className = 'unsubscribe';
+        unsubscribeBtn.innerHTML = 'unsubscribe';
+        listItem.appendChild(unsubscribeBtn);
         deets.appendChild(listItem);
-      }
 
-      details.appendChild(infoText);
+        addListenerToButton(unsubscribeBtn, data, listObj.list);
+
+       
+      }
     }
   };
 
-  http.send(data);
+  http.send();
 });
