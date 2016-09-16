@@ -2,18 +2,17 @@ function addListenerToButton(button, uuid, listId) {
   button.addEventListener('click', () => {
     const http = new XMLHttpRequest();
     const url = `http://localhost:1337/users`;
+    const params = 'uuid=${userUuid}&listId=listId';
     http.open('post', url, true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     http.onreadystatechange = function() {
       if (http.readyState == 4 && http.status == 200) {
-      alert(http.responseText);
+        alert(http.responseText);
+      }
   }
-}
-    // ?uuid=${data}&listId=${listid}
-    http.send();
+    http.send(params); // might work without params, just empty ()
   });
 }
-
 
 document.getElementsByClassName('search-button')[0].addEventListener('click', () => {
   const http = new XMLHttpRequest();
@@ -47,11 +46,8 @@ document.getElementsByClassName('search-button')[0].addEventListener('click', ()
         deets.appendChild(listItem);
 
         addListenerToButton(unsubscribeBtn, data, listObj.list);
-
-       
       }
     }
   };
-
   http.send();
 });
