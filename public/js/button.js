@@ -27,14 +27,18 @@ document.getElementsByClassName('search-button')[0].addEventListener('click', ()
   http.onreadystatechange = () => {
     if (http.readyState === 4 && http.status === 200) {
       const myRes = JSON.parse(http.responseText);
-      const details = document.getElementsByClassName('user-details')[0];
+      const userDetails = document.getElementsByClassName('user-details')[0];
+      userDetails.innerHTML = '';
+
       const infoText = document.createElement('p');
       infoText.innerHTML = `email: ${myRes.email} <br> uuid: ${myRes.uuid}`;
       infoText.className = 'user-info';
-      details.appendChild(infoText);
+      userDetails.appendChild(infoText);
+
+      const listDetails = document.getElementsByClassName('user-lists')[0];
+      listDetails.innerHTML = '';
 
       for (const listObj of myRes.lists) {
-        const deets = document.getElementsByClassName('user-lists')[0];
         const listItem = document.createElement('div');
         const listId = document.createElement('span');
         listId.innerHTML = `mailing list: ${listObj.list}`;
@@ -46,7 +50,7 @@ document.getElementsByClassName('search-button')[0].addEventListener('click', ()
         unsubscribeBtn.className = 'unsubscribe';
         unsubscribeBtn.innerHTML = 'unsubscribe';
         listItem.appendChild(unsubscribeBtn);
-        deets.appendChild(listItem);
+        listDetails.appendChild(listItem);
 
         addListenerToButton(unsubscribeBtn, data, listObj.list);
       }
