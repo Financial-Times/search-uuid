@@ -6,6 +6,7 @@ const path = require('path');
 const winston = require('winston');
 const compression = require('compression');
 const fetch = require('node-fetch');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(compression());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/public`));
 
 app.get('/', (req, res) => {
@@ -57,7 +59,8 @@ app.get('/users', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-  unsubscribeUser(req.query.uuid, req.query.listId, process.env.AUTH)
+  console.log(req.body);
+  unsubscribeUser(req.body.uuid, req.body.listId, process.env.AUTH)
   .then((userResponse) => {
     if (!userResponse.ok) {
       throw new Error('Error of some sort');

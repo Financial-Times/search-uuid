@@ -1,16 +1,18 @@
 function addListenerToButton(button, uuid, listId) {
   button.addEventListener('click', () => {
     const http = new XMLHttpRequest();
-    const url = 'http://localhost:1337/users';
-    const params = 'uuid=${userUuid}&listId=listId';
+    const url = 'http://localhost:3000/users';
+    const params = `uuid=${uuid}&listId=${listId}`;
     http.open('post', url, true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    http.onreadystatechange = function () {
+    http.onreadystatechange = () => {
       if (http.readyState === 4 && http.status === 200) {
-        alert(http.responseText);
+        const lists = document.getElementsByClassName('user-lists')[0];
+        const listItem = document.querySelector(`[data-id="${listId}"]`);
+        lists.removeChild(listItem);
       }
     };
-    http.send(params); // might work without params, just empty ()
+    http.send(params);
   });
 }
 
@@ -36,7 +38,8 @@ document.getElementsByClassName('search-button')[0].addEventListener('click', ()
         const listItem = document.createElement('div');
         const listId = document.createElement('span');
         listId.innerHTML = `mailing list: ${listObj.list}`;
-        listItem.className = 'user-lists';
+        listItem.className = 'one-list-item';
+        listItem.dataset.id = listObj.list;
         listItem.appendChild(listId);
 
         const unsubscribeBtn = document.createElement('button');
